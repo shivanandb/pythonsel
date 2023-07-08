@@ -1,0 +1,4 @@
+selenium==4.3.0
+selenium-page-factory==2.5
+Selenium-Screenshot==1.7.0
+webdriver-manager==3.7.0
