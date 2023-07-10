@@ -7,7 +7,7 @@
     "is_premium":"True",
     "is_docker_headless":"False",
     "docker_ip":"172.17.0.2",
-    "is_normal_headless":"True",
+    "is_normal_headless":"False",
     "log_file_name": "Test_results_status",
     "new_calculation_name": "smoke_test",
     "simulation_name_text": "Target scale - Simulation 1",
