@@ -5,7 +5,7 @@
     "free_user_name":"test1937_user4@mailsac.com",
     "free_user_password_encrypted":"TWFpbHNhYzA=",
     "is_premium":"True",
-    "is_docker_headless":"False",
+    "is_docker_headless":"True",
     "docker_ip":"172.17.0.2",
     "is_normal_headless":"False",
     "log_file_name": "Test_results_status",
