@@ -14,5 +14,5 @@ RUN pip install -r requirements.txt
 COPY . /smokeTest
 WORKDIR /smokeTest
 
-CMD python SCT-2418_prodigy_smoke_test.py
+CMD python smoketest.py
 
