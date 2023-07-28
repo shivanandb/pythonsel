@@ -1,13 +1,6 @@
 from common.common_methods import *
-from modules.create_new_calculation import *
-from modules.design_space import *
+
 from modules.launch_chrome_and_login_sct import *
-from modules.accept_license import *
-from modules.my_calculations_actions import *
-from modules.home_page import *
-from modules.provide_values_input_page import *
-from modules.verify_results_summary_page import *
-from modules.daywise_page_navigation import *
 config_variables = load_config_file()
 """
 Prodigy functional smoke test (SCT - Scale Calculation Tool web application) 

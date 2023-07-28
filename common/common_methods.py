@@ -40,6 +40,7 @@ def set_pdf_folder_path():
                 pdf_folder_path=docker_pdf_folder_path
         else:
                 pdf_folder_path=normal_pdf_folder_path
+                
         return pdf_folder_path
 
 def initialize_chromedriver():
@@ -51,6 +52,7 @@ def initialize_chromedriver():
         op.add_experimental_option('prefs', {"download.default_directory": pdf_folder_path})
         if(config_variables["is_docker_headless"]=="True"):
                 empty_pdf_folder_contents(pdf_folder_path)
+                op.add_experimental_option('prefs', {"download.default_directory": "/tmp"})
                 op.add_argument("--headless=new")
                 op.add_argument("--no-sandbox")
                 op.add_argument('--disable-dev-shm-usage')
