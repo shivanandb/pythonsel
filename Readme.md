@@ -21,8 +21,11 @@ Smoke test can be executed either in local machine (headless and UI) or docker c
 3. Ensure your credentials added to docker-users group
 4. 'selenium/standalone-chrome' image needs be pulled from docker hub using command:
    docker pull selenium/standalone-chrome
-5. Above container should be up (Administrator Power Shell privilege) using command:
-   docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
+5. Create a volume to (one time task) download PDFs between client and server containers: docker volume create --name prodigy_smoke_test
+6. stop all running containers selenium/standalone-chrome and run below command:
+   docker run -d -p 4444:4444 -v prodigy_smoke_test:/tmp -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
+Explanation: As we have 2 containers server: selenium/standalone-chrome - where PDF downloads and other smoke-test-client, the actual test when run from smoke-test-client would connect to chrome browser hosted inside selenium/standalone-chrome hence volume creation needed to access PDF downloads folder of selenium/standalone-chrome container, for which we set it to /tmp folder
+Note: /home/seluser/Downloads might work intermittent, as we faced permission issues, was tested /tmp did not have issues
 
 # Local machine execution 
 ## UI Execution
@@ -41,7 +44,7 @@ Smoke test can be executed either in local machine (headless and UI) or docker c
 1. To run test in dockerized headless mode, change 'is_docker_headless' variable value to 'True'
 2. Run below commands from project folder directory path 
    (a) docker build -t smoke-test-client .  (Builds the code as client for recent changes done in VS Code editor)
-   (b) docker run smoke-test-client (Runs the client)
+   (b) docker run -it -v  prodigy_smoke_test:/smokeTest/PDF_files smoke-test-client (Runs the client having the volume mount)
 3. Verifying the test execuiton needs to be done while test is in progress using command: 
    docker exec -it <container-id> sh and do ls (directory list) > and navigate to respective folders to verify test execution status under section 'Test Report and validation'
 

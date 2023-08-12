@@ -7,11 +7,12 @@ ENV PYTHONPATH=/smokeTest
 
 # install dependencies
 COPY requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip3.9 install -r requirements.txt
+
 
 # copy source 
 COPY . /smokeTest
 WORKDIR /smokeTest
 
-CMD python smoketest.py
+CMD python smokeTest.py
 

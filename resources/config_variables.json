@@ -1,15 +1,9 @@
 {
     "url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
-    "premium_user_name":"Admin",
+    "premium_user_name":"admin",
     "premium_user_password_encrypted":"YWRtaW4xMjM=",
-    "free_user_name":"test1937_user4@mailsac.com",
-    "free_user_password_encrypted":"TWFpbHNhYzA=",
     "is_docker_headless":"False",
     "docker_ip":"172.17.0.2",
     "is_normal_headless":"True",
-    "log_file_name": "Test_results_status",
-    "new_calculation_name": "smoke_test",
-    "simulation_name_text": "Target scale - Simulation 1",
-    "free_user_design_space_message":"Subscribe to Cytiva Bioreactor Scaler Pro to avail this feature.",
-    "email_address_free_user":"contact.scaling@cytiva.com"
+    "log_file_name": "Test_results_status"
 }
