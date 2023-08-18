@@ -51,7 +51,7 @@ def initialize_chromedriver():
         pdf_folder_path=set_pdf_folder_path()
         op.add_experimental_option('prefs', {"download.default_directory": pdf_folder_path})
         if(config_variables["is_docker_headless"]=="True"):
-                empty_pdf_folder_contents(pdf_folder_path)
+                #empty_pdf_folder_contents(pdf_folder_path)
                 op.add_experimental_option('prefs', {"download.default_directory": "/tmp"})
                 op.add_argument("--headless=new")
                 op.add_argument("--no-sandbox")
@@ -62,13 +62,13 @@ def initialize_chromedriver():
                 driver = webdriver.Remote(command_executor='http://'+config_variables['docker_ip']+':4444/wd/hub', options=op )
 
         elif(config_variables["is_normal_headless"]=="True"):
-                empty_folder_contents(pdf_folder_path)
+                #empty_folder_contents(pdf_folder_path)
                 op.add_argument("--no-sandbox")
                 op.add_argument("--headless=new")
                 op.add_argument("--start-maximized")
                 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=op)
         else:
-                empty_folder_contents(normal_pdf_folder_path)
+                #empty_folder_contents(normal_pdf_folder_path)
                 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=op)
                 
         Url = data["url"]

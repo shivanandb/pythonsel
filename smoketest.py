@@ -19,7 +19,10 @@ def search_admin(driver):
     test_name={'name':'search_admin'}
     try:
         home_page = HomePage(driver)
-        home_page.search_and_choose_admin()       
+        home_page.search_and_choose_admin()
+        home_page.verify_admin_header()      
+        home_page.verify_about()
+        home_page.add()
         save_success_status( test_name)
     except Exception as exception:      
         save_failure_status( test_name, exception, driver )
