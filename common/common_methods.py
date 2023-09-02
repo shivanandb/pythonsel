@@ -18,8 +18,8 @@ This class contains common reusable methods for basic operations
 current_directory = os.getcwd()
 screenshot_folder_path=current_directory+"/output_screenshots"
 logs_folder_path=current_directory+"/run_logs"
-normal_pdf_folder_path=current_directory+"\\PDF_files"
-docker_pdf_folder_path=current_directory+"/PDF_files"
+#normal_pdf_folder_path=current_directory+"\\PDF_files"
+#docker_pdf_folder_path=current_directory+"/PDF_files"
 
 ss = Screenshot_Clipping.Screenshot()
 
@@ -33,26 +33,17 @@ with open('resources/config_variables.json') as file:
         while not os.path.exists(logs_folder_path):
                 os.makedirs(logs_folder_path)
         log_file_path=os.path.join(logs_folder_path, log_file_name)
-        
-def set_pdf_folder_path():
-        config_variables = load_config_file()
-        if(config_variables["is_docker_headless"]=="True"):
-                pdf_folder_path=docker_pdf_folder_path
-        else:
-                pdf_folder_path=normal_pdf_folder_path
-                
-        return pdf_folder_path
 
 def initialize_chromedriver():
         config_variables = load_config_file()
         empty_folder_contents(screenshot_folder_path)
         empty_folder_contents(logs_folder_path)
         op = webdriver.ChromeOptions()
-        pdf_folder_path=set_pdf_folder_path()
-        op.add_experimental_option('prefs', {"download.default_directory": pdf_folder_path})
+        #pdf_folder_path=set_pdf_folder_path()
+        #op.add_experimental_option('prefs', {"download.default_directory": pdf_folder_path})
         if(config_variables["is_docker_headless"]=="True"):
                 #empty_pdf_folder_contents(pdf_folder_path)
-                op.add_experimental_option('prefs', {"download.default_directory": "/tmp"})
+                #op.add_experimental_option('prefs', {"download.default_directory": "/tmp"})
                 op.add_argument("--headless=new")
                 op.add_argument("--no-sandbox")
                 op.add_argument('--disable-dev-shm-usage')
@@ -108,18 +99,6 @@ def empty_folder_contents(mydir):
             print ('\n Unable to delete folder contents : ')
             print(mydir)
             pass
-
-def empty_pdf_folder_contents(mydir):
-        try:
-            filelist = [ f for f in os.listdir(mydir) if f.endswith(".pdf") ]
-            for f in filelist:
-                os.remove(os.path.join(mydir, f))
-            print ('\n Deletion completed for folder : ')
-            print(mydir)
-        except:
-            print ('\n Unable to delete folder contents : ')
-            print(mydir)
-            pass   
 
 def take_screenshot(screen_name, driver):
         while not os.path.exists(screenshot_folder_path):

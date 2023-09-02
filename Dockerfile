@@ -14,5 +14,5 @@ RUN pip3.9 install -r requirements.txt
 COPY . /smokeTest
 WORKDIR /smokeTest
 
-CMD python smokeTest.py
+CMD python smoketest.py
 

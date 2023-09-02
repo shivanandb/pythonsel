@@ -37,5 +37,4 @@ class LoginPage(PageFactory):
         self.sct_password.set_text(decodePassword)
         self.sign_in_button.click_button()
         wait_for_visibility_element(self.driver, 50, "//h6[text()='Dashboard']")
-        #assert self.driver.find_element(By.XPATH, "//p[text()='Paul Collings']").text == "Paul Collings"
 

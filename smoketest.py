@@ -20,12 +20,57 @@ def search_admin(driver):
     try:
         home_page = HomePage(driver)
         home_page.search_and_choose_admin()
+        save_success_status( test_name)
+    except Exception as exception:      
+        save_failure_status( test_name, exception, driver )
+
+def admin_header_verification(driver):
+    test_name={'name':'admin_header_verification'}
+    try:
+        home_page = HomePage(driver)
         home_page.verify_admin_header()      
-        home_page.verify_about()
+        save_success_status( test_name)
+    except Exception as exception:      
+        save_failure_status( test_name, exception, driver )
+
+def admin_add(driver):
+    test_name={'name':'admin_add'}
+    try:
+        home_page = HomePage(driver)
         home_page.add()
         save_success_status( test_name)
     except Exception as exception:      
         save_failure_status( test_name, exception, driver )
+
+def verify_about_dropdown(driver):
+    test_name={'name':'verify_about_dropdown'}
+    try:
+        home_page = HomePage(driver)
+        home_page.verify_about()
+    
+        save_success_status( test_name)
+    except Exception as exception:      
+        save_failure_status( test_name, exception, driver )
+
+def verify_user_management(driver):
+    test_name={'name':'verify_user_management'}
+    try:
+        home_page = HomePage(driver)
+        
+        home_page.click_and_verify_user_management()
+        save_success_status( test_name)
+    except Exception as exception:      
+        save_failure_status( test_name, exception, driver )
+
+def verify_job(driver):
+    test_name={'name':'verify_job'}
+    try:
+        home_page = HomePage(driver)
+        home_page.click_and_verify_job()
+        save_success_status( test_name)
+    except Exception as exception:      
+        save_failure_status( test_name, exception, driver )
+
 
 def tear_down(driver):
     test_name={"name":"tear_down"}
@@ -43,6 +88,11 @@ if __name__ == "__main__":
         driver.set_window_size(1024, 768)
     chrome_launch_and_hrm_login(driver)
     search_admin(driver)
+    admin_header_verification(driver)
+    admin_add(driver)
+    verify_about_dropdown(driver)
+    verify_user_management(driver)
+    verify_job(driver)
     tear_down(driver)
     
 else:
