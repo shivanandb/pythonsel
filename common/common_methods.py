@@ -80,12 +80,14 @@ def append_test_status_file(test_name):
             
 def save_failure_status(test_name, E, driver): 
         print(str(E))
+        print("Fail : ", test_name)
         update_status(test_name, 'status', 'Fail')
         update_status(test_name, 'exception', str(E))
         append_test_status_file(test_name)
         take_screenshot(test_name['name'], driver)            
             
 def save_success_status(test_name):  
+        print("Pass : ", test_name)
         update_status(test_name, 'status', 'Pass')
         append_test_status_file(test_name)
         
@@ -99,6 +101,11 @@ def empty_folder_contents(mydir):
             print ('\n Unable to delete folder contents : ')
             print(mydir)
             pass
+
+def calculate_test_time():
+    named_tuple = time.localtime() # get struct_time
+    test_run_time = time.strftime("%m/%d/%Y, %H:%M:%S", named_tuple)
+    print(test_run_time)
 
 def take_screenshot(screen_name, driver):
         while not os.path.exists(screenshot_folder_path):

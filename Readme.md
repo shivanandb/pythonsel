@@ -16,22 +16,19 @@ Smoke test can be executed either in local machine (headless and UI) or docker c
 11. Save all the changes before execution
 
 # Docker local machine setup 
-1. Docker Software (with valid Cytiva license) needs to be setup in local
+1. Docker Desktop (community version) needs to be setup in local
 2. Verify installation using 'docker --version' 
 3. Ensure your credentials added to docker-users group
 4. 'selenium/standalone-chrome' image needs be pulled from docker hub using command:
    docker pull selenium/standalone-chrome
-5. Create a volume to (one time task) download PDFs between client and server containers: docker volume create --name prodigy_smoke_test
-6. stop all running containers selenium/standalone-chrome and run below command:
-   docker run -d -p 4444:4444 -v prodigy_smoke_test:/tmp -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
-Explanation: As we have 2 containers server: selenium/standalone-chrome - where PDF downloads and other smoke-test-client, the actual test when run from smoke-test-client would connect to chrome browser hosted inside selenium/standalone-chrome hence volume creation needed to access PDF downloads folder of selenium/standalone-chrome container, for which we set it to /tmp folder
-Note: /home/seluser/Downloads might work intermittent, as we faced permission issues, was tested /tmp did not have issues
+5. stop all running containers selenium/standalone-chrome and run below command:
+   docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-chrome:latest
 
 # Local machine execution 
 ## UI Execution
 1. To execute in normal UI (visual) mode, edit 'is_normal_headless' as well as 'is_docker_headless' variables both to 'False' 
 2. Launch 'Power shell' and 'change directory' to verification-scripts/smokeTest2.2
-3. Run command 'python SCT-2418_prodigy_smoke_test.py' to view the execution launching in you monitor
+3. Run command 'python3.9 smoketest.py' to view the execution launching in you monitor
 4. Verify test execution status under section 'Test Report and validation'
 
 ## Headless execution
@@ -44,7 +41,7 @@ Note: /home/seluser/Downloads might work intermittent, as we faced permission is
 1. To run test in dockerized headless mode, change 'is_docker_headless' variable value to 'True'
 2. Run below commands from project folder directory path 
    (a) docker build -t smoke-test-client .  (Builds the code as client for recent changes done in VS Code editor)
-   (b) docker run -it -v  prodigy_smoke_test:/smokeTest/PDF_files smoke-test-client (Runs the client having the volume mount)
+   (b) docker run -it smoke-test-client (Runs the client )
 3. Verifying the test execuiton needs to be done while test is in progress using command: 
    docker exec -it <container-id> sh and do ls (directory list) > and navigate to respective folders to verify test execution status under section 'Test Report and validation'
 
@@ -58,5 +55,4 @@ Note: /home/seluser/Downloads might work intermittent, as we faced permission is
 
 # Test Report and validation
 1. Open text file under 'run_logs' folder to know the status (Pass/Fail having exception) 
-2. Open 'PDF_files' folder to see summary PDF and daywise 2 PDF files downloaded
-3. Open 'output_screenshots' to have 3 screenshot files single and 2 parameter graphs of Summary page
+2. Open 'output_screenshots' to have 3 screenshot files single and 2 parameter graphs of Summary page
