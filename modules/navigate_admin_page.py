@@ -26,11 +26,8 @@ class HomePage(PageFactory):
         wait_for_clickable_element(self.driver, 20, "//span[text()='Admin']")
         self.admin_page_link.click_button()
         wait_for_visibility_element(self.driver, 30, "//h6[text()='Admin']")
-        print("1")
         assert self.driver.find_element(By.XPATH, "//h6[text()='Admin']").text == "Admin"
-        print("2")
         assert self.driver.find_element(By.XPATH, "//h6[text()='User Management']").text == "User Management"
-        print("3")
 
     def click_and_verify_user_management(self):
         self.user_mgmt.click_button()
@@ -41,11 +38,9 @@ class HomePage(PageFactory):
         self.job_header.click_button()
         wait_for_clickable_element(self.driver, 100, "//a[text()='Job Titles']")
         job_items=self.driver.find_elements(By.XPATH, "//a[@role='menuitem']")
-        print("3")
         for job_item in job_items:
             time.sleep(0.25)
             assert job_item.text in ['Job Titles', 'Pay Grades', 'Employment Status', 'Job Categories', 'Work Shifts']
-            print("5")
         
     def verify_admin_header(self):
         header_menu_items=self.driver.find_elements(By.XPATH, "//span[@class='oxd-topbar-body-nav-tab-item']")
