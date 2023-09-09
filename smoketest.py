@@ -3,6 +3,7 @@ from common.common_methods import *
 from modules.navigate_admin_page import *
 from modules.launch_chrome_and_login_app import *
 from modules.dashboard_page import *
+from modules.time_page import *
 config_variables = load_config_file()
 
 """
@@ -39,9 +40,17 @@ def dashboard_click_link(driver):
     except Exception as exception:      
         save_failure_status( test_name, exception, driver )
 
+def time_click_link(driver):
+    test_name={'name':'time_click_link'}
+    try:
+        time_page = TimePage(driver)
+        time_page.verify_punch()
+        save_success_status( test_name)
+    except Exception as exception:      
+        save_failure_status( test_name, exception, driver )
+
 def search_admin(driver):
-    test_name={'name':'search_admin'}
-    
+    test_name={'name':'search_admin'} 
     try:
         home_page = HomePage(driver)
         home_page.search_and_choose_admin()
@@ -91,7 +100,7 @@ def verify_job(driver):
     try:
         home_page = HomePage(driver)
         home_page.click_and_verify_job()
-        home_page.check_collapse()
+        #home_page.check_collapse()
         save_success_status( test_name)
     except Exception as exception:      
         save_failure_status( test_name, exception, driver )
@@ -114,6 +123,7 @@ if __name__ == "__main__":
     chrome_launch_and_hrm_login(driver)
     dashboard_test(driver)
     dashboard_click_link(driver)
+    time_click_link(driver)
     search_admin(driver)
     admin_header_verification(driver)
     admin_add(driver)

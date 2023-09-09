@@ -16,18 +16,17 @@ class DashboardPage(PageFactory):
         "dashboard_header": ('XPATH', '//h6[text()="Dashboard"]'),
         "punch_header_text": ('XPATH', '//p[text()="Punched In"]'),
         "my_actions_header_text": ('XPATH', '//p[text()="My Actions"]'),
-        
-        "chart_emp_dist_title":('XPATH', '//p[text()="Employee Distribution by Sub Unit"]'),
-        "add_button":('XPATH', '//button[text()=" Add "]'),
-        "job_header":('XPATH', '//span[text()="Job "]'),
-        "user_mgmt":('XPATH', '//span[text()="User Management "]')
+        "quick_launch_header_text": ('XPATH', '//p[text()="Quick Launch"]'),
+        "chart_emp_dist_title": ('XPATH', '//p[text()="Employee Distribution by Sub Unit"]'),
+        "button_punch":('XPATH', '//i[@class="oxd-icon bi-stopwatch"]')
     }
 
     def dashboard_verify(self):
         assert self.dashboard_header.text == "Dashboard"
         assert self.punch_header_text.text == "Punched In"
         assert self.my_actions_header_text.text == "My Actions"
-        self.driver.execute_script("window.scrollTo(0, -500)")
+        assert self.quick_launch_header_text.text == "Quick Launch"
+        self.driver.execute_script("window.scrollTo(0, 500)")
         wait_for_clickable_element(self.driver, 50, "//span[@title='Engineering']")
 
     def dashboard_click_links(self):

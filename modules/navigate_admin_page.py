@@ -41,12 +41,10 @@ class HomePage(PageFactory):
         print("1")
         wait_for_clickable_element(self.driver, 120, "//a[text()='Job Titles']")
         print("2")
-        job_headers=self.driver.find_elements(By.XPATH, "//ul[@class='oxd-dropdown-menu']")
+        job_headers=self.driver.find_elements(By.XPATH, "//a[@role='menuitem']")
         print("3")
         for job_header_text in job_headers:
-            print(job_header_text.text)
-            print("4")
-            #assert job_header_text.text in ['Job Titles', 'Pay Grades', 'Employment Status', 'Job Categories', 'Work Shifts']
+            assert job_header_text.text in ['Job Titles', 'Pay Grades', 'Employment Status', 'Job Categories', 'Work Shifts']
             print("5")
         
     def verify_admin_header(self):

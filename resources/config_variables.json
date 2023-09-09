@@ -4,6 +4,6 @@
     "premium_user_password_encrypted":"YWRtaW4xMjM=",
     "is_docker_headless":"False",
     "docker_ip":"172.17.0.2",
-    "is_normal_headless":"False",
+    "is_normal_headless":"True",
     "log_file_name": "Test_results_status"
 }
