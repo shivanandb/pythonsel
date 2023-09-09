@@ -1,3 +1,4 @@
+import time
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -38,19 +39,17 @@ class HomePage(PageFactory):
 
     def click_and_verify_job(self):
         self.job_header.click_button()
-        print("1")
-        wait_for_clickable_element(self.driver, 120, "//a[text()='Job Titles']")
-        print("2")
-        job_headers=self.driver.find_elements(By.XPATH, "//a[@role='menuitem']")
+        wait_for_clickable_element(self.driver, 100, "//a[text()='Job Titles']")
+        job_items=self.driver.find_elements(By.XPATH, "//a[@role='menuitem']")
         print("3")
-        for job_header_text in job_headers:
-            assert job_header_text.text in ['Job Titles', 'Pay Grades', 'Employment Status', 'Job Categories', 'Work Shifts']
+        for job_item in job_items:
+            time.sleep(0.25)
+            assert job_item.text in ['Job Titles', 'Pay Grades', 'Employment Status', 'Job Categories', 'Work Shifts']
             print("5")
         
     def verify_admin_header(self):
         header_menu_items=self.driver.find_elements(By.XPATH, "//span[@class='oxd-topbar-body-nav-tab-item']")
         for header_menu_item in header_menu_items:
-            print(header_menu_item.text)
             assert header_menu_item.text in ['User Management', 'Job', 'Organization', 'Qualifications', 'More']
     
     def add(self):
