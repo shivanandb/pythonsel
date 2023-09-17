@@ -1,4 +1,6 @@
 import time
+import smtplib
+import ssl
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
@@ -99,6 +101,12 @@ def calculate_test_time():
     test_run_time = time.strftime("%m/%d/%Y, %H:%M:%S", named_tuple)
     print(test_run_time)
 
+def smtp_setup():
+        connection = smtplib.SMTP()
+        connection.connect('[hostname].')
+        connection.starttls()
+        print(ssl.DER_cert_to_PEM_cert(connection.sock.getpeercert(binary_form=True)))
+        
 def take_screenshot(screen_name, driver):
         while not os.path.exists(screenshot_folder_path):
                 os.makedirs(screenshot_folder_path)
@@ -116,19 +124,6 @@ def load_config_file():
         with open('resources/config_variables.json') as file:
             config_variables = json.load(file)
         return config_variables
-
-def verify_pdf_exists(file_pdf):
-        pdf_folder_path=set_pdf_folder_path()
-        pdf_file_path=os.path.join(pdf_folder_path, file_pdf)
-        while not os.path.exists(pdf_file_path):        
-                time.sleep(1)
-        assert path.exists(pdf_file_path)==True
-
-def wait_for_pdf_generation(driver):
-        report_generating_status=driver.find_element(By.XPATH, "//div[text()='Generating report....']")
-        while report_generating_status.is_displayed()==True:
-            WebDriverWait(driver, 1000).until(EC.invisibility_of_element_located((By.XPATH, "//div[text()='Generating report....']")))
-            break
 
 def wait_until_condition_met(driver, xpath):
         save_button_enable_status=driver.find_element(By.XPATH, xpath)

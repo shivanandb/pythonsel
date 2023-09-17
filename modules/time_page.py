@@ -16,10 +16,13 @@ class TimePage(PageFactory):
         "button_punch":('XPATH', '//i[@class="oxd-icon bi-stopwatch"]')
     }
 
-    def verify_punch(self):
+    def verify_navigation_punch(self):
         self.driver.execute_script("window.scrollTo(0, -500)")
+        wait_for_clickable_element(self.driver, 100, "//i[@class='oxd-icon bi-stopwatch']")
         self.button_punch.click()
         wait_for_visibility_element(self.driver, 100, "//h6[text()='Attendance']")
+
+    def verify_timesheet_menu(self):
         self.driver.find_element(By.XPATH, "//span[text()='Timesheets ']").click()
         wait_for_clickable_element(self.driver, 100, "//a[text()='My Timesheets']")
         timesheet_items=self.driver.find_elements(By.XPATH, "//a[@role='menuitem']")

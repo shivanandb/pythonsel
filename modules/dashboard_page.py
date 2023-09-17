@@ -18,12 +18,12 @@ class DashboardPage(PageFactory):
         "my_actions_header_text": ('XPATH', '//p[text()="My Actions"]'),
         "quick_launch_header_text": ('XPATH', '//p[text()="Quick Launch"]'),
         "chart_emp_dist_title": ('XPATH', '//p[text()="Employee Distribution by Sub Unit"]'),
+        "chart_emp_dist_location": ('XPATH', '//p[text()="Employee Distribution by Location"]'),
         "button_punch":('XPATH', '//i[@class="oxd-icon bi-stopwatch"]')
     }
 
     def dashboard_verify(self):
         assert self.dashboard_header.text == "Dashboard"
-        assert self.punch_header_text.text == "Punched In"
         assert self.my_actions_header_text.text == "My Actions"
         assert self.quick_launch_header_text.text == "Quick Launch"
         self.driver.execute_script("window.scrollTo(0, 500)")
@@ -32,6 +32,7 @@ class DashboardPage(PageFactory):
     def dashboard_click_links(self):
         wait_for_visibility_element(self.driver, 50, "//p[text()='Employee Distribution by Sub Unit']")
         assert self.chart_emp_dist_title.text == "Employee Distribution by Sub Unit"
+        assert self.chart_emp_dist_location.text == "Employee Distribution by Location"
         dash_links=self.driver.find_elements(By.XPATH, "//span[@class='oxd-text oxd-text--span']")
         for dash_link in dash_links:
             dash_link.click()

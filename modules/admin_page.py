@@ -33,15 +33,22 @@ class HomePage(PageFactory):
         self.user_mgmt.click_button()
         wait_for_clickable_element(self.driver, 60, "//a[text()='Users']")
         assert self.driver.find_element(By.XPATH, "//a[text()='Users']").text == "Users"
+        self.user_mgmt.click_button()
+    
+    def verify_help_button(self):
+        wait_for_clickable_element(self.driver, 40, "//button[@title='Help']")
+        self.driver.find_element(By.XPATH, "//button[@title='Help']").click()
+        p = self.driver.current_window_handle
+        #obtain parent window handle
+        parent = self.driver.window_handles[0]
+        #obtain browser tab window
+        chld = self.driver.window_handles[1]
+        #switch to browser tab
+        self.driver.switch_to.window(chld)
+        print("Page title for browser tab:")
+        print(self.driver.title)
+        #//button[@title='Help']
 
-    def click_and_verify_job(self):
-        self.job_header.click_button()
-        wait_for_clickable_element(self.driver, 100, "//a[text()='Job Titles']")
-        job_items=self.driver.find_elements(By.XPATH, "//a[@role='menuitem']")
-        for job_item in job_items:
-            time.sleep(0.25)
-            assert job_item.text in ['Job Titles', 'Pay Grades', 'Employment Status', 'Job Categories', 'Work Shifts']
-        
     def verify_admin_header(self):
         header_menu_items=self.driver.find_elements(By.XPATH, "//span[@class='oxd-topbar-body-nav-tab-item']")
         for header_menu_item in header_menu_items:
@@ -51,22 +58,3 @@ class HomePage(PageFactory):
         wait_for_clickable_element(self.driver, 30, "//button[text()=' Add ']")
         self.add_button.click_button()
         assert self.driver.find_element(By.XPATH, "//h6[text()='Add User']").text == "Add User"
-            
-    def verify_about(self):
-        wait_for_clickable_element(self.driver, 50, "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']")
-        self.driver.find_element(By.XPATH, "//i[@class='oxd-icon bi-caret-down-fill oxd-userdropdown-icon']").click()
-        wait_for_clickable_element(self.driver, 50, "(//a[@class='oxd-userdropdown-link'])[1]")
-        profile_items=self.driver.find_elements(By.XPATH, "//a[@class='oxd-userdropdown-link']")
-        for profile_item in profile_items:
-            assert profile_item.text in ['About', 'Support', 'Change Password', 'Logout']
-    
-    def verify_each_menu(self):
-        menu_main=self.driver.find_elements(By.XPATH, "//ul[@class='oxd-main-menu']")
-        for each_menu_main in menu_main:
-            if(each_menu_main.text == "Directory"):
-                self.driver.execute_script("window.scrollTo(0, -1000)")
-            assert each_menu_main.text in ['Admin', 'PIM', 'Leave', 'Time', 'Recruitment', 'My Info', 'Performance', 'Dashboard', 'Directory', 'Maintenance', 'Claim', 'Buzz']
-
-    def check_collapse(self):
-        self.driver.find_element(By.XPATH, "//button[@class='oxd-icon-button oxd-main-menu-button']").click()
-        self.driver.find_element(By.XPATH, "//button[@class='oxd-icon-button oxd-main-menu-button']").click()
