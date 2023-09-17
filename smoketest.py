@@ -1,6 +1,6 @@
 import time
 from common.common_methods import *
-from common.send_email import *
+#from common.send_email import *
 from modules.admin_page import *
 from modules.launch_chrome_and_login_app import *
 from modules.dashboard_page import *
