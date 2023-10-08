@@ -2,8 +2,8 @@
     "url": "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
     "premium_user_name":"admin",
     "premium_user_password_encrypted":"YWRtaW4xMjM=",
-    "is_docker_headless":"False",
+    "is_docker_headless":"True",
     "docker_ip":"172.17.0.2",
-    "is_normal_headless":"True",
+    "is_normal_headless":"False",
     "log_file_name": "Test_results_status"
 }
