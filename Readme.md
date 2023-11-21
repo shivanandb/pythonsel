@@ -34,7 +34,7 @@ Smoke test can be executed either in local machine (headless and UI) or docker c
 ## Headless execution
 1. To execute in normal headless mode, edit 'is_normal_headless' variable to 'True' and 'is_docker_headless' variable value to 'False'
 2. Launch 'Power shell' and 'change directory' to verification-scripts/smokeTest2.2
-3. Run command 'python SCT-2418_prodigy_smoke_test.py' (execution occurs silent in background)
+3. Run command 'python smoketest.py' (execution occurs silent in background)
 4. Verify test execution status under section 'Test Report and validation'
 
 ## Docker execution
